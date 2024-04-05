@@ -1,10 +1,10 @@
+import Button from "./components/Button";
+
 export default function Navbar({ setOpenPage }) {
 
     const NavItem = ({ name, funct }) => {
         return (
-            <button onClick={funct} className="px-6 py-2 rounded-full text-sm font-medium bg-blue-500 text-white hover:bg-blue-700">
-                {name}
-            </button>
+            <Button funct={funct} text={name} />
         );
     }
 
