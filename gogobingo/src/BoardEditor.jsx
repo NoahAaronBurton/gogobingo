@@ -1,5 +1,4 @@
 import PageHeader from "./components/PageHeader"
-import Button from "./components/Button"
 import BoardForm from "./components/BoardForm"
 
 export default function BoardEditor() {
