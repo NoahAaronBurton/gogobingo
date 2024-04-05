@@ -1,21 +1,33 @@
 import Button from "./Button";
 import { useEffect, useState } from "react";
 
-export default function BoardForm() {
+export default function BoardForm({onFormSubmit}) {
     const [textCols, setTextCols] = useState(3);
     const [textGridSize, setTextGridSize] = useState("3x3");
+    const [boardTitle, setBoardTitle] = useState("");
     const inputClases = "px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm";
     const dropDownClasses = "px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm";
 
     function handleSubmit(e) {
         e.preventDefault();
         console.log("Form submitted");
+
+        console.log(boardTitle);
+
+        // const gridSize = document.getElementById("grid-size").value;
+
     }
 
     // Update gridSize whenever the selected option changes
     function handleSelectChange(e) {
         setTextGridSize(e.target.value);
     }
+
+    // New function to handle changes to the board title input
+    function handleTitleChange(e) {
+         setBoardTitle(e.target.value);
+    }
+
     //function to generate the correct amount of word inputs based on grid size
     function generateWordInputs() {
         //get grid size from dropdown
@@ -41,7 +53,7 @@ export default function BoardForm() {
                 input.name = `task-${i}-${j}`;
                 input.id = `task-${i}-${j}`;
                 input.className = inputClases;
-                input.placeholder = `task ${i + 1}, ${j + 1}`;
+                input.placeholder = `${i}-${j}chatGPT suggestions?`;
                 textInput.appendChild(input);
             }
         }
@@ -60,7 +72,7 @@ export default function BoardForm() {
         <form>
             <div className="flex flex-col">
                 <label htmlFor="board-title">Board Title</label>
-                <input type="text" id="board-title" name="board-title" className={inputClases} />
+                <input type="text" id="board-title" name="board-title" className={inputClases} value={boardTitle} onChange={handleTitleChange} />
             </div>
             <div className="flex flex-col">
                 <label htmlFor="grid-size" className="mb-2">Select a grid size (determine the length of the game):</label>
