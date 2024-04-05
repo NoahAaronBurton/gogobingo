@@ -10,12 +10,18 @@ export default function BoardForm({onFormSubmit}) {
 
     function handleSubmit(e) {
         e.preventDefault();
-        console.log("Form submitted");
 
-        console.log(boardTitle);
+        // Get the tasks
+        const tasks = [];
+        for (let i = 0; i < textCols; i++) {
+            for (let j = 0; j < textCols; j++) {
+                const task = document.getElementById(`task-${i}-${j}`).value;
+                tasks.push(task);
+            }
+        }
 
-        // const gridSize = document.getElementById("grid-size").value;
-
+        // Call onFormSubmit with the tasks array
+        onFormSubmit(tasks);
     }
 
     // Update gridSize whenever the selected option changes
