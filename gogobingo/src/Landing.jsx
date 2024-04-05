@@ -1,9 +1,12 @@
+import PageHeader from "./components/PageHeader"
+
 export default function Landing() {
 
     return (
         <>
-        <h1 className="text-4xl font-bold mb-10">Welcome to GOGO Bingo</h1>
-        <p>this is the Landing Page People will see when they first arrive</p>
+        <PageHeader title="Welcome to GoGoBingo!" subtitle="This is the Landing Page People will see when they first arrive.">
+            <p>Click Create a Board to get started.</p>
+        </PageHeader>
 
         </>
     )
