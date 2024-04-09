@@ -10,7 +10,7 @@ export default function BoardEditor() {
     console.log('editor: ' + isModalOpen)
 
     function getGridClassName() {
-        return `grid grid-cols-${textCols} w-96 h-96 max-h-96 max-w-96 m-auto`;
+        return `grid grid-cols-${textCols} w-96 h-96 m-auto`;
     }
     return (
     <div>
@@ -25,12 +25,14 @@ export default function BoardEditor() {
                 <div className="bg-white p-4 rounded-md w-11/12 h-5/6 m-auto">
                     <h2 className="text-2xl font-bold">Preview</h2>
                     <div className={getGridClassName()}>
-                        {bingoBoard.map((task, index) => (
-                            <div key={index} className="aspect-content aspect-w-1 aspect-h-1 p-1 border border-gray-300">
-                                {task}
-                            </div>
-                        ))}
-                    </div>
+    {bingoBoard.map((task, index) => (
+        <div key={index} className="flex flex-col items-center justify-center border border-gray-300 overflow-auto">
+            <div className="w-16 h-16 flex items-center justify-center text-xs break-normal">
+                <p>{task}</p>
+            </div>
+        </div>
+    ))}
+</div>
                     <button onClick={() => setIsModalOpen(false)}>Close</button>
                 </div>
             </div>
