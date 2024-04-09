@@ -1,7 +1,7 @@
 import Button from "./Button";
 import { useEffect, useState } from "react";
 
-export default function BoardForm({onFormSubmit, onColsChange}) {
+export default function BoardForm({onFormSubmit, onColsChange, openModal}) {
     const [textCols, setTextCols] = useState(3);
     const [textGridSize, setTextGridSize] = useState("3x3");
     const [boardTitle, setBoardTitle] = useState("");
@@ -25,6 +25,8 @@ export default function BoardForm({onFormSubmit, onColsChange}) {
         // Call onColsChange with the textCols value
         onColsChange(textCols);
         console.log('form: ' + textCols);
+        // Open the modal
+        openModal(true);
     }
 
     // Update gridSize whenever the selected option changes
