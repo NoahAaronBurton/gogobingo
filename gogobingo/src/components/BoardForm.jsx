@@ -1,7 +1,7 @@
 import Button from "./Button";
 import { useEffect, useState } from "react";
 
-export default function BoardForm({onFormSubmit}) {
+export default function BoardForm({onFormSubmit, onColsChange}) {
     const [textCols, setTextCols] = useState(3);
     const [textGridSize, setTextGridSize] = useState("3x3");
     const [boardTitle, setBoardTitle] = useState("");
@@ -22,6 +22,9 @@ export default function BoardForm({onFormSubmit}) {
 
         // Call onFormSubmit with the tasks array
         onFormSubmit(tasks);
+        // Call onColsChange with the textCols value
+        onColsChange(textCols);
+        console.log('form: ' + textCols);
     }
 
     // Update gridSize whenever the selected option changes

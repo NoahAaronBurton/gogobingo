@@ -4,7 +4,9 @@ import { useState } from "react";
 
 export default function BoardEditor() {
     const [bingoBoard, setBingoBoard] = useState([]);
-   
+    const [textCols, setTextCols] = useState(3);
+
+    console.log('editor: ' + textCols); // Log the value of textCols
     return (
     <div>
         <div>
@@ -12,10 +14,10 @@ export default function BoardEditor() {
             </PageHeader>
         </div>
         <div className="flex">
-            <BoardForm onFormSubmit={setBingoBoard}/>
+        <BoardForm onFormSubmit={setBingoBoard} onColsChange={setTextCols}/>
             <div className="w-1/2">
                 <h2 className="text-2xl font-bold">Preview</h2>
-                <div className="grid grid-cols-3">
+                <div className={`grid grid-cols-${textCols}`}>
                     {bingoBoard.map((task, index) => (
                         <div key={index} className="p-4 border border-gray-300 rounded-md">
                             {task}
