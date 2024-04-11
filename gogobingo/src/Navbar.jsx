@@ -1,6 +1,10 @@
 import Button from "./components/Button";
+import LoginForm from "./components/LoginForm";
+import { useState } from 'react';
 
-export default function Navbar({ setOpenPage }) {
+export default function Navbar({ setOpenPage, setUser}) {
+
+  const [showModal, setShowModal] = useState(false);
 
     const NavItem = ({ name, funct }) => {
         return (
@@ -13,6 +17,8 @@ export default function Navbar({ setOpenPage }) {
           <div className="flex space-x-4">
             <NavItem name="Home" funct={() => setOpenPage("landing")} />
             <NavItem name="Create a Board" funct={() => setOpenPage("board-editor")} />
+            <NavItem name="Login" funct={() => setShowModal(true)} />
+            <LoginForm showModal={showModal} setShowModal={setShowModal} setUser={setUser} />
           </div>
          
         </nav>
