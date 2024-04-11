@@ -22,17 +22,18 @@ export default function BoardEditor() {
         <BoardForm onFormSubmit={setBingoBoard} onColsChange={setTextCols} openModal={setIsModalOpen}/>
         {isModalOpen && (
             <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-                <div className="bg-white p-4 rounded-md w-11/12 h-5/6 m-auto">
+                <div className="bg-white p-4 rounded-md w-11/12 h-5/6 m-auto items-center overflow-auto">
                     <h2 className="text-2xl font-bold">Preview</h2>
-                    <div className={getGridClassName()}>
-                    {bingoBoard.map((task, index) => (
-                        <div key={index} className="flex flex-col items-center justify-center border border-gray-300 overflow-auto">
-                            <div className="w-16 h-16 flex items-center justify-center text-xs break-normal">
-                                <p>{task}</p>
+                    <div style={{ display: 'grid', gridTemplateColumns: `repeat(${textCols}, 1fr)`, gridAutoRows: '1fr', maxWidth: '500px', maxHeight: '500px' }}>
+                        {bingoBoard.map((task, index) => (
+                            <div key={index} className="border border-gray-300 text-center text-base break-words overflow-auto relative">
+                                <div style={{ paddingBottom: '100%' }}></div>
+                                <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}>
+                                    <p>{task}</p>
+                                </div>
                             </div>
-                        </div>
-                    ))}
-                </div>
+                        ))}
+                    </div>
                     <button onClick={() => setIsModalOpen(false)}>Close</button>
                 </div>
             </div>
