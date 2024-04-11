@@ -43,17 +43,27 @@ export default function Navbar({ setOpenPage, setUser, user, sessionId, setSessi
       }
     }
 
+    function logout(e) {
+      e.preventDefault();
+      console.log('Logout button pressed');
+      axios.post(api +'/logout')
+      .then(response => {
+        console.log(response.data);
+        setUser(null);
+        setSessionId(null);
+      })
+      .catch(error => {
+        console.error('Error logging out:', error);
+      });
+    }
 
-    // log in that user
-
-    // set state vars for session id and user email
     return (
         <nav className="flex justify-between w-full p-4">
           <div className="flex space-x-4">
             <NavItem name="Home" funct={() => setOpenPage("landing")} />
             <NavItem name="Create a Board" funct={() => setOpenPage("board-editor")} />
             { !user && <NavItem name="Login" funct={() => setShowModal(true)} />}
-            { user && <NavItem name="Logout" funct={() => setUser(null)} />}
+            { user && <NavItem name="Logout" funct={logout} />}
             <LoginForm showModal={showModal} setShowModal={setShowModal} setUser={setUser} sessionId={sessionId} setSessionId={setSessionId} />
           </div>
         <Button text="Quick register (dev only)" funct={quickRegister} /> 
