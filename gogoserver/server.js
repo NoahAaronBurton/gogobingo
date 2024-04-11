@@ -1,5 +1,7 @@
 const express = require('express');
 const app = express();
+const cors = require('cors');
+app.use(cors());
 
 // passport
 const passport = require('passport');
@@ -68,8 +70,18 @@ app.post('/register', (req, res) => {
 app.post('/login', 
   passport.authenticate('local', { failureRedirect: '/login' }),
   function(req, res) {
-    res.status(200).send('User logged in' + '\n' + JSON.stringify(req.user));
+    console.log('\n Session ID:'+ req.sessionID);
+    console.log('\n Session:'+ JSON.stringify(req.session)); // log the session data
+    console.log('\n user:'+ JSON.stringify(req.user)); // log the user data
+    res.status(200).send({ message: 'User logged in', user: req.user, sessionId: req.sessionID });
   });
+
+app.post('/logout', function(req, res, next) {
+    req.logout(function(err) {
+      if (err) { return next(err); }
+      res.redirect('/');
+    });
+});  
 
 
 const PORT = process.env.PORT || 3000;

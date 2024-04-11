@@ -1,24 +1,32 @@
 import { useState } from 'react';
 import axios from 'axios';
+const api = import.meta.env.VITE_API_URL;
+import Button from './Button';
 
-const LoginForm = ({ showModal, setShowModal, setUser }) => {
+
+const LoginForm = ({ showModal, setShowModal, setUser, sessionId, setSessionId}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     const handleSubmit = async (event) => {
         event.preventDefault();
 
+        console.log('Log in button pressed');
+        // from state vars
         const user = {
-            email,
-            password,
+          email,
+          password,
         };
-
-        // Send a post request to your Passport.js login route
-        // const response = await axios.post('/login', user);
-
-        // Handle response...
-        setUser(user);
-    };
+      
+        try {
+          const response = await axios.post(api +'/login', user);
+          console.log(response.data);
+          setUser(user);
+          setSessionId(response.data.sessionId);
+        } catch (error) {
+          console.error('Error logging in:', error);
+        }
+      };
 
     return (
         <>
@@ -33,7 +41,7 @@ const LoginForm = ({ showModal, setShowModal, setUser }) => {
                             Password:
                             <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
                         </label>
-                        <input type="submit" value="Log In" />
+                        <Button text="Log In" onClick={handleSubmit} type="submit"/>
                         <button onClick={() => setShowModal(false)}>Close</button>
                     </form>
                 </div>
