@@ -64,7 +64,7 @@ app.post('/register', (req, res) => {
     users.push({ email, password });
 
     console.log(users);
-    res.status(201).send('User registered');
+    res.status(201).send('User registered and logged in');
 });
 
 app.post('/login', 

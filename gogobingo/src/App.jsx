@@ -4,6 +4,7 @@ import Navbar from './Navbar'
 import Landing from './Landing'
 import BoardEditor from './BoardEditor'
 import LoginForm from './components/LoginForm'
+import SignUp from './components/SignUp'
 import Footer from './components/Footer'
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         {openPage === 'landing' && <Landing />}
         {openPage === 'board-editor' && <BoardEditor />}
         {openPage === 'login' && <LoginForm />}
+        {openPage === 'sign-up' && <SignUp setSessionId={setSessionId} setUser={setUser} setOpenPage={setOpenPage} />}
       </div>
       <Footer user={user} sessionId={sessionId} />
     </div>
