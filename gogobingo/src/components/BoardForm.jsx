@@ -1,10 +1,10 @@
 import Button from "./Button";
 import { useEffect, useState } from "react";
 
-export default function BoardForm({onFormSubmit, onColsChange, openModal}) {
+export default function BoardForm({onFormSubmit, onColsChange, openModal, boardTitle, setBoardTitle}) {
     const [textCols, setTextCols] = useState(3);
     const [textGridSize, setTextGridSize] = useState("3x3");
-    const [boardTitle, setBoardTitle] = useState("");
+    
     const inputClases = "px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm";
     const dropDownClasses = "px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm";
 
@@ -20,6 +20,7 @@ export default function BoardForm({onFormSubmit, onColsChange, openModal}) {
             }
         }
 
+        
         // Call onFormSubmit with the tasks array
         onFormSubmit(tasks);
         // Call onColsChange with the textCols value
