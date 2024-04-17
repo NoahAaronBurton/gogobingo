@@ -3,6 +3,8 @@ const app = express();
 const cors = require('cors');
 app.use(cors());
 
+require('dotenv').config({ path: process.env.NODE_ENV === 'staging' ? '.env.staging' : '.env' });
+
 // passport
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
