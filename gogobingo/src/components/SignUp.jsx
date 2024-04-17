@@ -29,6 +29,7 @@ export default function SignUp ({ setUser, setSessionID, setOpenPage}) {
           const response = await axios.post(api +'/register', user, { withCredentials: true });
           setUser(response.data.user);
           setSessionID(response.data.sessionID);
+            setOpenPage('landing');
           console.log(response.data);
         } catch (error) {
             console.error('Error registering in:', error);

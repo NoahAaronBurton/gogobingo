@@ -4,7 +4,7 @@ const api = import.meta.env.VITE_API_URL;
 import Button from './Button';
 
 
-const LoginForm = ({ showModal, setShowModal, setUser, sessionID, setSessionID}) => {
+const LoginForm = ({ setOpenPage,showModal, setShowModal, setUser, sessionID, setSessionID}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -23,6 +23,8 @@ const LoginForm = ({ showModal, setShowModal, setUser, sessionID, setSessionID})
           console.log(response.data);
           setUser(user);
           setSessionID(response.data.sessionID);
+            setOpenPage('landing');
+            setShowModal(false);
         } catch (error) {
           console.error('Error logging in:', error);
         }

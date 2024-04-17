@@ -56,7 +56,7 @@ export default function Navbar({ setOpenPage, setUser, user, sessionID, setSessi
             { !user && <NavItem name="Login" funct={() => setShowModal(true)} />}
             { !user && <NavItem name="Sign Up" funct={() => setOpenPage("sign-up")} />}
             { user && <NavItem name="Logout" funct={logout} />}
-            <LoginForm showModal={showModal} setShowModal={setShowModal} setUser={setUser} sessionID={sessionID} setSessionID={setSessionID} />
+            <LoginForm setOpenPage={setOpenPage} showModal={showModal} setShowModal={setShowModal} setUser={setUser} sessionID={sessionID} setSessionID={setSessionID} />
             {/* <SignUp setUser={setUser} setSessionID={setSessionID} /> */}
           </div>
         <Button text="Quick register (dev only)" funct={quickRegister} /> 
