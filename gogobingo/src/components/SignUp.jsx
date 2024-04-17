@@ -3,7 +3,7 @@ import { useState } from 'react';
 import axios from 'axios';
 const api = import.meta.env.VITE_API_URL;
 
-export default function SignUp ({ setUser, setSessionId, setOpenPage}) {
+export default function SignUp ({ setUser, setSessionID, setOpenPage}) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -26,23 +26,25 @@ export default function SignUp ({ setUser, setSessionId, setOpenPage}) {
         };
         // sign up
         try {
-          const response = await axios.post(api +'/register', user);
+          const response = await axios.post(api +'/register', user, { withCredentials: true });
+          setUser(response.data.user);
+          setSessionID(response.data.sessionID);
           console.log(response.data);
         } catch (error) {
             console.error('Error registering in:', error);
         }
 
         // then log in
-        try {
-            const response = await axios.post(api +'/login', user);
-            console.log(response.data);
-            setSignupMessage(response.data.message);
-            setUser(user);
-            setSessionId(response.data.sessionId);
-            setOpenPage('landing');
-        } catch (error) {
-            console.error('Error logging in:', error);
-        }
+        // try {
+        //     const response = await axios.post(api +'/login', user, { withCredentials: true });
+        //     console.log(response.data);
+        //     setSignupMessage(response.data.message);
+        //     setUser(user);
+        //     setSessionID(response.data.sessionID);
+        //     setOpenPage('landing');
+        // } catch (error) {
+        //     console.error('Error logging in:', error);
+        // }
     }
 
     return (

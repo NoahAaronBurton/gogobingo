@@ -4,7 +4,7 @@ const api = import.meta.env.VITE_API_URL;
 import Button from './Button';
 
 
-const LoginForm = ({ showModal, setShowModal, setUser, sessionId, setSessionId}) => {
+const LoginForm = ({ showModal, setShowModal, setUser, sessionID, setSessionID}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -19,10 +19,10 @@ const LoginForm = ({ showModal, setShowModal, setUser, sessionId, setSessionId})
         };
       
         try {
-          const response = await axios.post(api +'/login', user);
+          const response = await axios.post(api +'/login', user, { withCredentials: true });
           console.log(response.data);
           setUser(user);
-          setSessionId(response.data.sessionId);
+          setSessionID(response.data.sessionID);
         } catch (error) {
           console.error('Error logging in:', error);
         }

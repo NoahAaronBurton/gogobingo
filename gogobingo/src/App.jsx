@@ -13,21 +13,21 @@ console.log('env:', env);
 function App() {
   const [openPage, setOpenPage] = useState('landing');
   const [user, setUser] = useState(null);
-  const [sessionId, setSessionId] = useState(null);
+  const [sessionID, setSessionID] = useState(null);
 
   
 
 
   return (
     <div className="flex flex-col w-full min-h-screen justify-between items-center">
-      <Navbar setOpenPage={setOpenPage} setUser={setUser} user={user} sessionId={sessionId} setSessionId={setSessionId} />
+      <Navbar setOpenPage={setOpenPage} setUser={setUser} user={user} sessionID={sessionID} setSessionID={setSessionID} />
       <div id='main' className='flex-grow'>
         {openPage === 'landing' && <Landing />}
         {openPage === 'board-editor' && <BoardEditor />}
         {openPage === 'login' && <LoginForm />}
-        {openPage === 'sign-up' && <SignUp setSessionId={setSessionId} setUser={setUser} setOpenPage={setOpenPage} />}
+        {openPage === 'sign-up' && <SignUp setSessionID={setSessionID} setUser={setUser} setOpenPage={setOpenPage} />}
       </div>
-      {env === 'development' && <Footer user={user} sessionId={sessionId} />}
+      {env === 'development' && <Footer user={user} sessionID={sessionID} />}
     </div>
   );
 }

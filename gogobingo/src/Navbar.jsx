@@ -5,7 +5,7 @@ import { useState } from 'react';
 import axios from 'axios';
 const api = import.meta.env.VITE_API_URL;
 
-export default function Navbar({ setOpenPage, setUser, user, sessionId, setSessionId}) {
+export default function Navbar({ setOpenPage, setUser, user, sessionID, setSessionID}) {
 
   const [showModal, setShowModal] = useState(false);
 
@@ -19,43 +19,32 @@ export default function Navbar({ setOpenPage, setUser, user, sessionId, setSessi
       e.preventDefault();
       console.log('Quick login button pressed');
 
-      const user = {
-        email: 't@t.com',
-        password: 'password',
-
-      };
-
+      
       try {
-        const response = await axios.post(api +'/register', user);
+        const user = {
+          email: 't@t.com',
+          password: 'password',
+  
+        };
+        const response = await axios.post(api +'/register', user, { withCredentials: true });
         console.log(response.data);
-        // setUser(user);
-        // setSessionId(response.data.sessionId);
+        setUser(user);
+        setSessionID(response.data.sessionID);
       } catch (error) {
         console.error('Error registering in:', error);
       }
-      // this will still log in if the above block fails (they may already be registered)
-      try {
-        const response = await axios.post(api +'/login', user);
-        console.log(response.data);
-        setUser(user);
-        setSessionId(response.data.sessionId);
-      } catch (error) {
-        console.error('Error logging in:', error);
-      }
+
     }
 
-    function logout(e) {
-      e.preventDefault();
-      console.log('Logout button pressed');
-      axios.post(api +'/logout')
-      .then(response => {
-        console.log(response.data);
+    const logout = async () => {
+      try {
+        const url = api + '/logout';
+        await axios.get(url, { withCredentials: true });
         setUser(null);
-        setSessionId(null);
-      })
-      .catch(error => {
-        console.error('Error logging out:', error);
-      });
+        setSessionID(null);
+      } catch (error) {
+        console.log(error);
+      }
     }
 
 
@@ -67,8 +56,8 @@ export default function Navbar({ setOpenPage, setUser, user, sessionId, setSessi
             { !user && <NavItem name="Login" funct={() => setShowModal(true)} />}
             { !user && <NavItem name="Sign Up" funct={() => setOpenPage("sign-up")} />}
             { user && <NavItem name="Logout" funct={logout} />}
-            <LoginForm showModal={showModal} setShowModal={setShowModal} setUser={setUser} sessionId={sessionId} setSessionId={setSessionId} />
-            {/* <SignUp setUser={setUser} setSessionId={setSessionId} /> */}
+            <LoginForm showModal={showModal} setShowModal={setShowModal} setUser={setUser} sessionID={sessionID} setSessionID={setSessionID} />
+            {/* <SignUp setUser={setUser} setSessionID={setSessionID} /> */}
           </div>
         <Button text="Quick register (dev only)" funct={quickRegister} /> 
         </nav>
