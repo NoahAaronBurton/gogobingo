@@ -7,11 +7,15 @@ import LoginForm from './components/LoginForm'
 import SignUp from './components/SignUp'
 import Footer from './components/Footer'
 
+const env = import.meta.env.MODE;
+console.log('env:', env);
+
 function App() {
   const [openPage, setOpenPage] = useState('landing');
   const [user, setUser] = useState(null);
   const [sessionId, setSessionId] = useState(null);
 
+  
 
 
   return (
@@ -23,7 +27,7 @@ function App() {
         {openPage === 'login' && <LoginForm />}
         {openPage === 'sign-up' && <SignUp setSessionId={setSessionId} setUser={setUser} setOpenPage={setOpenPage} />}
       </div>
-      <Footer user={user} sessionId={sessionId} />
+      {env === 'development' && <Footer user={user} sessionId={sessionId} />}
     </div>
   );
 }
